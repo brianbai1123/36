@@ -1,14 +1,14 @@
-# 菜根谭
+# 三十六计
 
-《菜根谭》清刻本的独立导读。在线阅读：
+《三十六计》的独立导读。在线阅读：
 
-**https://brianbai1123.github.io/cgt/**
+**https://brianbai1123.github.io/36/**
 
-每一则都先放原文，再按五步讲开：先理解，找出核心观点，重建逻辑，用简单的话说一遍，最后用两个问题检查能不能自己讲出来。
+每一计先放原文、注释、译文，再按五步讲开：先理解，找出核心观点，重建逻辑，用简单的话说一遍，最后用两个问题检查能不能自己讲出来。
 
-目录按清刻本的五部来排：修身、应酬、评议、闲适、概论，共 534 则。开篇是于孔兼的序。
+目录按六套来排：胜战计、敌战计、攻战计、混战计、并战计、败战计，每套六计。
 
-原文取自清刻本。本站的解析是自己写的，不替代原书，也不照搬他人注释。
+原文、注释、译文照录太极书馆《三十六计》，未作改动。本站的五步解析是自己写的，不替代原书。
 
 ## 本地预览
 
@@ -36,8 +36,8 @@ npm run build
 
 ## 部署
 
-推送到 `main` 后，GitHub Actions 会静态导出并发布到 Pages。仓库名需要是 `cgt`，Pages 源是 **GitHub Actions**，站点路径才是 `/cgt/`。
+推送到 `main` 后，GitHub Actions 会静态导出并发布到 Pages。仓库名需要是 `36`，Pages 源是 **GitHub Actions**，站点路径才是 `/36/`。
 
 ## 技术栈
 
-Next.js 16（`output: 'export'`）+ React 19 + TypeScript + Tailwind CSS v4。无后端、无数据库。原文在 `src/content/originals.json`，解析在 `src/content/readings.json`。
+Next.js 16（`output: 'export'`）+ React 19 + TypeScript + Tailwind CSS v4。无后端、无数据库。原文、注释、译文在 `src/content/originals.json`，解析在 `src/content/readings.json`。

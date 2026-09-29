@@ -27,9 +27,9 @@ export function ReadingShell({
       <aside className="border-b border-line bg-paper lg:sticky lg:top-0 lg:h-svh lg:overflow-y-auto lg:border-r lg:border-b-0">
         <div className="px-5 py-6">
           <Link href="/" className="block">
-            <p className="font-serif text-2xl text-pine">菜根谭</p>
+            <p className="font-serif text-2xl text-pine">三十六计</p>
             <p className="mt-1 text-sm leading-relaxed text-muted">
-              先读原文，再用五步把味道嚼开
+              原文、注释、译文，再用五步讲明白
             </p>
           </Link>
         </div>
@@ -57,6 +57,7 @@ function ChapterIndex({ current }: { current: number | "start" }) {
           String(entry.n) === keyword ||
           entry.title.includes(keyword) ||
           entry.original.includes(keyword) ||
+          entry.translation.includes(keyword) ||
           entry.section.includes(keyword)
         );
       })
@@ -66,20 +67,19 @@ function ChapterIndex({ current }: { current: number | "start" }) {
   return (
     <nav aria-label="章节" className="py-4">
       <label className="mb-4 block px-2">
-        <span className="sr-only">搜索则目</span>
+        <span className="sr-only">搜索计名</span>
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="搜则数、标题或原文"
+          placeholder="搜第几计、计名、原文或译文"
           className="w-full border border-line bg-background px-3 py-2 text-sm text-ink outline-none focus:border-pine"
         />
       </label>
       {keyword ? (
         <div className="px-2">
           <p className="text-xs font-semibold text-muted">
-            {hits.length > 0 ? `找到 ${hits.length} 则` : "没有这一则"}
-            {hits.length === 40 ? "，先显示前 40 则" : ""}
-          </p>
+            {hits.length > 0 ? `找到 ${hits.length} 计` : "没有这一计"}
+                      </p>
           <ol className="mt-1">
             {hits.map((entry) => (
               <IndexLink key={entry.n} n={entry.n} title={entry.title} active={entry.n === current} />

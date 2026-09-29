@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
-/** 与 GitHub 仓库名一致 → https://brianbai1123.github.io/cgt/ */
-const repo = "cgt";
+/** 与 GitHub 仓库名一致 → https://brianbai1123.github.io/36/ */
+const repo = "36";
 const isGhPages = process.env.GITHUB_PAGES === "true";
 
 const nextConfig: NextConfig = {

@@ -18,7 +18,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const entry = findEntry(slug);
   if (!entry) {
-    return { title: "没有这一则" };
+    return { title: "没有这一计" };
   }
   return {
     title: entry.title,

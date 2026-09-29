@@ -35,7 +35,7 @@ export function FiveSteps({
           <p>{reading.plain}</p>
         </Step>
         <Step n={5} title="检查你是否能快速理解">
-          <p>先盖住答案，用自己的话说。说得出来，这一则才算读过。</p>
+          <p>先盖住答案，用自己的话说。说得出来，这一计才算读过。</p>
           <div className="mt-4 divide-y divide-line border-y border-line">
             {reading.checks.map((check, checkIndex) => (
               <details key={check.question} className="group py-3">

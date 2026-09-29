@@ -17,7 +17,7 @@ const readings = readingsJson as Record<string, Reading>;
 export const entries: Entry[] = originals.map((item) => {
   const reading = readings[String(item.n)];
   if (!reading) {
-    throw new Error(`缺少第 ${item.n} 则解析`);
+    throw new Error(`缺少第 ${item.n} 计解析`);
   }
   return { ...item, ...reading };
 });

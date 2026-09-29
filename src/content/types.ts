@@ -1,12 +1,15 @@
-export const SECTIONS = ["修身", "应酬", "评议", "闲适", "概论"] as const;
+export const SECTIONS = ["胜战计", "敌战计", "攻战计", "混战计", "并战计", "败战计"] as const;
 
 export type SectionName = (typeof SECTIONS)[number];
 
 export type OriginalEntry = {
   n: number;
   section: SectionName;
+  no: string;
   title: string;
   original: string;
+  notes: string[];
+  translation: string;
 };
 
 export type Check = {
@@ -34,38 +37,45 @@ export type SectionMeta = {
 
 export const SECTION_META: SectionMeta[] = [
   {
-    name: "修身",
-    range: "1–30",
+    name: "胜战计",
+    range: "1–6",
     from: 1,
+    to: 6,
+    blurb: "自己占优势时怎么打。藏住真意，挑对方最薄的地方下手。",
+  },
+  {
+    name: "敌战计",
+    range: "7–12",
+    from: 7,
+    to: 12,
+    blurb: "双方势均力敌时怎么打。虚实相生，等对方先乱。",
+  },
+  {
+    name: "攻战计",
+    range: "13–18",
+    from: 13,
+    to: 18,
+    blurb: "主动进攻时怎么打。先摸清虚实，再引诱、再擒首。",
+  },
+  {
+    name: "混战计",
+    range: "19–24",
+    from: 19,
+    to: 24,
+    blurb: "局面混乱时怎么打。抽掉根源，乱中取利，分清远近。",
+  },
+  {
+    name: "并战计",
+    range: "25–30",
+    from: 25,
     to: 30,
-    blurb: "先把自己炼干净。念头、欲望和过失，都从自己身上查起。",
+    blurb: "对付盟友和多方角力。悄悄换掉关键，一步步掌握主导。",
   },
   {
-    name: "应酬",
-    range: "31–81",
+    name: "败战计",
+    range: "31–36",
     from: 31,
-    to: 81,
-    blurb: "人要来往。软硬、亲疏、担当和抽身，都得有分寸。",
-  },
-  {
-    name: "评议",
-    range: "82–130",
-    from: 82,
-    to: 130,
-    blurb: "把世事放远了看。荣辱、福祸、真假，别被眼前一截骗了。",
-  },
-  {
-    name: "闲适",
-    range: "131–176",
-    from: 131,
-    to: 176,
-    blurb: "心要有个能歇的地方。淡和闲不是逃避，是让人还能继续走。",
-  },
-  {
-    name: "概论",
-    range: "177–534",
-    from: 177,
-    to: 534,
-    blurb: "把道理收成日常能用的句子。处世、居家、读书、进退，都在这里。",
+    to: 36,
+    blurb: "处在劣势时怎么办。攻心、设疑、以假乱真，实在不行就走。",
   },
 ];

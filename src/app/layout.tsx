@@ -20,11 +20,11 @@ const serif = Noto_Serif_SC({
 
 export const metadata: Metadata = {
   title: {
-    default: "菜根谭",
-    template: "%s · 菜根谭",
+    default: "三十六计",
+    template: "%s · 三十六计",
   },
   description:
-    "按《菜根谭》清刻本的顺序，每一则先读原文，再用五步把意思讲成能记住的话。",
+    "按《三十六计》六套的顺序，每一计先读原文、注释、译文，再用五步把意思讲成能记住的话。",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
