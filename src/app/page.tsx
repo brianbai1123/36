@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
-import { ChapterView } from "@/components/chapter-view";
+import { OverviewView } from "@/components/overview-view";
 import { ReadingShell } from "@/components/reading-shell";
-import { findChapter } from "@/content/book";
 
 export const metadata: Metadata = {
-  title: "把原书讲成一条路",
+  title: "菜根里有真味",
   description:
-    "《高效能人士的七个习惯》的独立导读。先按原书骨架讲清精华，再按先理解、核心观点、重建逻辑、简单表达、自我检查五步讲给中学生。",
+    "《菜根谭》清刻本导读。每一则先放原文，再按先理解、核心观点、重建逻辑、简单表达、自我检查五步讲明白。",
 };
 
 export default function HomePage() {
-  const chapter = findChapter("start");
-  if (!chapter) {
-    throw new Error("缺少开篇");
-  }
   return (
-    <ReadingShell currentSlug="start">
-      <ChapterView chapter={chapter} />
+    <ReadingShell current="start">
+      <OverviewView />
     </ReadingShell>
   );
 }

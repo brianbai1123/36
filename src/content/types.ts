@@ -1,57 +1,71 @@
-export type DiagramId =
-  | "whole"
-  | "paradigm"
-  | "see-do-get"
-  | "habit-def"
-  | "maturity"
-  | "ppc"
-  | "circles"
-  | "matrix"
-  | "centers"
-  | "bank"
-  | "listen"
-  | "synergy"
-  | "saw";
+export const SECTIONS = ["修身", "应酬", "评议", "闲适", "概论"] as const;
 
-export type EssenceBlock = {
-  heading: string;
-  paragraphs: string[];
-  points?: string[];
-  diagram?: DiagramId;
-  table?: {
-    caption: string;
-    headers: string[];
-    rows: string[][];
-  };
-};
+export type SectionName = (typeof SECTIONS)[number];
 
-export type Chapter = {
-  slug: string;
-  group: "读之前" | "原书的地基" | "个人的胜利" | "公众的胜利" | "更新与收束";
-  navLabel: string;
-  eyebrow: string;
+export type OriginalEntry = {
+  n: number;
+  section: SectionName;
   title: string;
-  bookRef: string;
-  lead: string;
-  habit?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
-  place?: string;
-  essenceIntro: string;
-  essence: EssenceBlock[];
-  plain: {
-    understand: string;
-    core: string;
-    logic: string[];
-    scenes: { title: string; body: string }[];
-    checks: { question: string; answer: string }[];
-  };
-  remember: string;
-  glossary?: { term: string; def: string }[];
+  original: string;
 };
 
-export const GROUP_ORDER = [
-  "读之前",
-  "原书的地基",
-  "个人的胜利",
-  "公众的胜利",
-  "更新与收束",
-] as const;
+export type Check = {
+  question: string;
+  answer: string;
+};
+
+export type Reading = {
+  understand: string;
+  core: string;
+  logic: string[];
+  plain: string;
+  checks: Check[];
+};
+
+export type Entry = OriginalEntry & Reading;
+
+export type SectionMeta = {
+  name: SectionName;
+  range: string;
+  from: number;
+  to: number;
+  blurb: string;
+};
+
+export const SECTION_META: SectionMeta[] = [
+  {
+    name: "修身",
+    range: "1–30",
+    from: 1,
+    to: 30,
+    blurb: "先把自己炼干净。念头、欲望和过失，都从自己身上查起。",
+  },
+  {
+    name: "应酬",
+    range: "31–81",
+    from: 31,
+    to: 81,
+    blurb: "人要来往。软硬、亲疏、担当和抽身，都得有分寸。",
+  },
+  {
+    name: "评议",
+    range: "82–130",
+    from: 82,
+    to: 130,
+    blurb: "把世事放远了看。荣辱、福祸、真假，别被眼前一截骗了。",
+  },
+  {
+    name: "闲适",
+    range: "131–176",
+    from: 131,
+    to: 176,
+    blurb: "心要有个能歇的地方。淡和闲不是逃避，是让人还能继续走。",
+  },
+  {
+    name: "概论",
+    range: "177–534",
+    from: 177,
+    to: 534,
+    blurb: "把道理收成日常能用的句子。处世、居家、读书、进退，都在这里。",
+  },
+];

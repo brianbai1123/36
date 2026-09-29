@@ -1,43 +1,50 @@
-import { ground } from "./ground";
-import { privateVictory } from "./private-victory";
-import { publicVictory } from "./public-victory";
-import { renewal } from "./renewal";
-import { GROUP_ORDER, type Chapter } from "./types";
+import readingsJson from "./readings.json";
+import { catalog } from "./nav";
+import {
+  SECTION_META,
+  type Entry,
+  type Reading,
+  type SectionName,
+} from "./types";
 
-export type { Chapter, DiagramId, EssenceBlock } from "./types";
-export { GROUP_ORDER } from "./types";
+export type { Entry, SectionName } from "./types";
+export { SECTION_META, SECTIONS } from "./types";
+export { entryHref } from "./nav";
 
-export const chapters: Chapter[] = [
-  ...ground,
-  ...privateVictory,
-  ...publicVictory,
-  ...renewal,
-];
+const originals = catalog;
+const readings = readingsJson as Record<string, Reading>;
 
-export function findChapter(slug: string) {
-  return chapters.find((chapter) => chapter.slug === slug);
+export const entries: Entry[] = originals.map((item) => {
+  const reading = readings[String(item.n)];
+  if (!reading) {
+    throw new Error(`缺少第 ${item.n} 则解析`);
+  }
+  return { ...item, ...reading };
+});
+
+export function findEntry(slug: string) {
+  const n = Number(slug);
+  if (!Number.isInteger(n)) return undefined;
+  return entries.find((entry) => entry.n === n);
 }
 
-export function chapterHref(slug: string) {
-  return slug === "start" ? "/" : `/${slug}/`;
-}
-
-export function chapterGroups() {
-  return GROUP_ORDER.map((label) => ({
-    label,
-    chapters: chapters.filter((chapter) => chapter.group === label),
-  })).filter((group) => group.chapters.length > 0);
-}
-
-export function locate(slug: string) {
-  const index = chapters.findIndex((chapter) => chapter.slug === slug);
+export function locate(n: number) {
+  const index = entries.findIndex((entry) => entry.n === n);
   return {
     index,
-    total: chapters.length,
-    prev: index > 0 ? chapters[index - 1] : undefined,
-    next:
-      index >= 0 && index < chapters.length - 1
-        ? chapters[index + 1]
-        : undefined,
+    total: entries.length,
+    prev: index > 0 ? entries[index - 1] : undefined,
+    next: index >= 0 && index < entries.length - 1 ? entries[index + 1] : undefined,
   };
+}
+
+export function entriesIn(section: SectionName) {
+  return entries.filter((entry) => entry.section === section);
+}
+
+export function sectionGroups() {
+  return SECTION_META.map((meta) => ({
+    ...meta,
+    entries: entriesIn(meta.name),
+  }));
 }

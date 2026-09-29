@@ -1,15 +1,14 @@
-# 七个习惯
+# 菜根谭
 
-《高效能人士的七个习惯》的独立导读。在线阅读：
+《菜根谭》清刻本的独立导读。在线阅读：
 
-**https://brianbai1123.github.io/7habit/**
+**https://brianbai1123.github.io/cgt/**
 
-它按史蒂芬·柯维原书的顺序来讲：先是由内而外和成熟模式，然后是个人领域的成功（习惯一到三）、公众领域的成功（习惯四到六），最后是不断更新。每一站都读两遍。
+每一则都先放原文，再按五步讲开：先理解，找出核心观点，重建逻辑，用简单的话说一遍，最后用两个问题检查能不能自己讲出来。
 
-1. **原书在讲什么**：跟着该章自己的论证，把模型讲清楚。
-2. **用简单的话再讲一遍**：先理解，找出核心观点，重建逻辑，用初中生活里的语言表达，再用三个问题检查能不能自己讲出来。
+目录按清刻本的五部来排：修身、应酬、评议、闲适、概论，共 534 则。开篇是于孔兼的序。
 
-文中的林可是为了把道理放进校园而写的人物，不是原书人物。本站是独立导读，不替代原书，也与 FranklinCovey 没有隶属关系。
+原文取自清刻本。本站的解析是自己写的，不替代原书，也不照搬他人注释。
 
 ## 本地预览
 
@@ -37,8 +36,8 @@ npm run build
 
 ## 部署
 
-推送到 `main` 后，GitHub Actions 会静态导出并发布到 Pages。仓库的 Pages 源是 **GitHub Actions**。
+推送到 `main` 后，GitHub Actions 会静态导出并发布到 Pages。仓库名需要是 `cgt`，Pages 源是 **GitHub Actions**，站点路径才是 `/cgt/`。
 
 ## 技术栈
 
-Next.js 16（`output: 'export'`）+ React 19 + TypeScript + Tailwind CSS v4 + shadcn/ui 的按钮。无后端、无数据库。正文在 `src/content/`。
+Next.js 16（`output: 'export'`）+ React 19 + TypeScript + Tailwind CSS v4。无后端、无数据库。原文在 `src/content/originals.json`，解析在 `src/content/readings.json`。

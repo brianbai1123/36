@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ChapterView } from "@/components/chapter-view";
+import { EntryView } from "@/components/entry-view";
 import { ReadingShell } from "@/components/reading-shell";
-import { chapters, findChapter } from "@/content/book";
+import { entries, findEntry } from "@/content/book";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return chapters
-    .filter((chapter) => chapter.slug !== "start")
-    .map((chapter) => ({ slug: chapter.slug }));
+  return entries.map((entry) => ({ slug: String(entry.n) }));
 }
 
 export async function generateMetadata({
@@ -18,29 +16,29 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const chapter = findChapter(slug);
-  if (!chapter) {
-    return { title: "没有这一站" };
+  const entry = findEntry(slug);
+  if (!entry) {
+    return { title: "没有这一则" };
   }
   return {
-    title: chapter.title,
-    description: chapter.lead,
+    title: entry.title,
+    description: entry.core,
   };
 }
 
-export default async function ChapterPage({
+export default async function EntryPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const chapter = findChapter(slug);
-  if (!chapter) {
+  const entry = findEntry(slug);
+  if (!entry) {
     notFound();
   }
   return (
-    <ReadingShell currentSlug={chapter.slug}>
-      <ChapterView chapter={chapter} />
+    <ReadingShell current={entry.n}>
+      <EntryView entry={entry} />
     </ReadingShell>
   );
 }

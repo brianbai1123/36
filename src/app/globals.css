@@ -2,15 +2,18 @@
 
 :root {
   --background: #f3efe6;
-  --foreground: #1c1916;
-  --pine: #1b4332;
-  --pine-soft: #e7f0ea;
-  --clay: #9a4e32;
-  --band: #efe4d2;
+  --foreground: #161412;
+  --pine: #1c3d36;
+  --pine-soft: #e5ede9;
+  --clay: #a4472b;
+  --gold: #b8872f;
+  --teal: #1d4a5c;
+  --band: #efe8db;
   --line: #e0d5c4;
   --muted: #5c554c;
   --paper: #f7f3eb;
-  --ink: #1c1916;
+  --ink: #161412;
+  --mint: #8fc7b0;
 }
 
 @theme inline {
@@ -19,11 +22,14 @@
   --color-pine: var(--pine);
   --color-pine-soft: var(--pine-soft);
   --color-clay: var(--clay);
+  --color-gold: var(--gold);
+  --color-teal: var(--teal);
   --color-band: var(--band);
   --color-line: var(--line);
   --color-muted: var(--muted);
   --color-paper: var(--paper);
   --color-ink: var(--ink);
+  --color-mint: var(--mint);
   --font-sans: var(--font-sans), "PingFang SC", "Noto Sans SC", "Microsoft YaHei",
     "WenQuanYi Micro Hei", sans-serif;
   --font-serif: var(--font-serif), "Songti SC", "Noto Serif SC", "Source Han Serif SC",
@@ -43,5 +49,5 @@ body {
 }
 
 ::selection {
-  background: #d7e6dc;
+  background: #d6e4de;
 }
