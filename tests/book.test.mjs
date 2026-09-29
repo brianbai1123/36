@@ -55,7 +55,10 @@ test("每一计保留原文、注释、译文，注释标号与原文一一对�
 function assertChain(chain, breaks, label) {
   assert.ok(chain.length >= 6, label);
   assert.equal(chain[0].via, undefined, label);
-  for (const link of chain.slice(1)) assert.ok(link.via, `${label} ${link.claim}`);
+  for (const link of chain.slice(1)) {
+    assert.ok(link.via, `${label} ${link.claim}`);
+    assert.ok(!link.claim.startsWith(link.via), `${label} repeats via: ${link.claim}`);
+  }
   for (const link of chain) assert.ok(link.detail.length >= 20, `${label} ${link.claim}`);
   assert.ok(chain.at(-1).claim.startsWith("结果"), label);
   assert.ok(breaks.length >= 2, label);
