@@ -3,6 +3,7 @@
 import { useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { catalog, entryHref, sectionGroups, sectionOf } from "@/content/nav";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const groups = sectionGroups();
 
@@ -28,10 +29,11 @@ export function ReadingShell({
         <div className="px-5 py-6">
           <Link href="/" className="block">
             <p className="font-serif text-2xl text-pine">三十六计</p>
-            <p className="mt-1 text-sm leading-relaxed text-muted">
+            <p className="mt-1 font-kai text-sm leading-relaxed text-muted">
               原文、注释、译文，再用五步讲明白
             </p>
           </Link>
+          <ThemeSwitcher />
         </div>
         <details className="border-t border-line px-5 py-3 lg:hidden">
           <summary className="cursor-pointer text-sm font-semibold">目录 · {label}</summary>
@@ -146,7 +148,7 @@ function IndexLink({ n, title, active }: { n: number; title: string; active: boo
             : "block border-l-2 border-transparent px-3 py-1.5 text-sm text-ink hover:border-line hover:bg-band/60"
         }
       >
-        <span className="mr-1.5 text-clay">{n}</span>
+        <span className="mr-1.5 font-num text-clay">{n}</span>
         {title}
       </Link>
     </li>

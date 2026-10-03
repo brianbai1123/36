@@ -12,22 +12,23 @@ export function EntryView({ entry }: { entry: Entry }) {
   return (
     <article id="chapter" className="mx-auto w-full max-w-3xl px-5 py-10 sm:px-8 sm:py-14">
       <p className="text-sm font-semibold text-clay">
-        {entry.no}，共 {total} 计
+        <span className="font-num">{entry.no}</span>，共{" "}
+        <span className="font-num">{total}</span> 计
         <span className="mx-2 text-line">/</span>
         <span className="text-muted">{entry.section}</span>
       </p>
       <h1 className="mt-3 font-serif text-4xl leading-tight text-ink sm:text-5xl">
         {entry.title}
       </h1>
-      <p className="mt-4 text-sm leading-relaxed text-muted">
+      <p className="mt-4 font-kai text-sm leading-relaxed text-muted">
         《三十六计》{entry.section}之{positionInSection(entry)}
       </p>
 
       <p className="mt-8 flex flex-wrap gap-4 text-sm">
-        <a href="#notes" className="font-semibold text-teal underline-offset-4 hover:underline">
+        <a href="#notes" className="font-semibold text-pine underline-offset-4 hover:underline">
           注释
         </a>
-        <a href="#translation" className="font-semibold text-teal underline-offset-4 hover:underline">
+        <a href="#translation" className="font-semibold text-pine underline-offset-4 hover:underline">
           译文
         </a>
         <a href="#plain" className="font-semibold text-pine underline-offset-4 hover:underline">
@@ -56,7 +57,7 @@ export function EntryView({ entry }: { entry: Entry }) {
 
       <section id="translation" className="mt-10 scroll-mt-6">
         <h2 className="font-serif text-2xl text-ink">译文</h2>
-        <p className="mt-4 border-l-2 border-teal pl-4 text-lg leading-[1.9] text-ink">
+        <p className="mt-4 border-l-2 border-pine pl-4 text-lg leading-[1.9] text-ink">
           {entry.translation}
         </p>
       </section>
@@ -66,7 +67,7 @@ export function EntryView({ entry }: { entry: Entry }) {
         intro="上面是原文、注释和译文。下面按同一个意思走五步，方便你检查自己是不是真的懂了。"
       />
 
-      <p className="mt-10 border-l-2 border-gold pl-4 font-serif text-xl leading-relaxed text-ink">
+      <p className="mt-10 border-l-2 border-clay pl-4 font-serif text-xl leading-relaxed text-ink">
         {entry.core}
       </p>
 
@@ -77,7 +78,7 @@ export function EntryView({ entry }: { entry: Entry }) {
             className={cn(buttonVariants({ variant: "outline" }), "justify-start")}
           >
             <ArrowLeft />
-            {prev.n}. {prev.title}
+            <span className="font-num">{prev.n}.</span> {prev.title}
           </Link>
         ) : (
           <Link href="/" className={cn(buttonVariants({ variant: "outline" }), "justify-start")}>
@@ -87,7 +88,7 @@ export function EntryView({ entry }: { entry: Entry }) {
         )}
         {next ? (
           <Link href={entryHref(next.n)} className={buttonVariants()}>
-            {next.n}. {next.title}
+            <span className="font-num">{next.n}.</span> {next.title}
             <ArrowRight />
           </Link>
         ) : null}

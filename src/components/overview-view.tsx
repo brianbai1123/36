@@ -12,15 +12,15 @@ export function OverviewView() {
       <p className="text-sm font-semibold text-clay">
         开篇
         <span className="mx-2 text-line">/</span>
-        <span className="text-muted">六套 · 36 计</span>
+        <span className="text-muted">六套 · <span className="font-num">36</span> 计</span>
       </p>
       <h1 className="mt-3 font-serif text-4xl leading-tight text-ink sm:text-5xl">
         三十六计，按处境取用
       </h1>
-      <p className="mt-4 text-sm leading-relaxed text-muted">
+      <p className="mt-4 font-kai text-sm leading-relaxed text-muted">
         先看全书怎么分，再一计一计读：原文、注释、译文，然后五步讲明白
       </p>
-      <p className="mt-6 text-lg leading-relaxed text-ink">
+      <p className="mt-6 font-kai text-lg leading-relaxed text-ink">
         每一计只有一两句原文，常借《周易》的一卦说理。本站把原文、注释、译文原样摆出来，再用五步讲开：先理解，找出核心观点，理出逻辑因果链，用简单的话说一遍，最后留两个问题让你自己讲。
       </p>
 
@@ -28,7 +28,7 @@ export function OverviewView() {
         <a href="#original" className="font-semibold text-pine underline-offset-4 hover:underline">
           先看题解
         </a>
-        <a href="#map" className="font-semibold text-teal underline-offset-4 hover:underline">
+        <a href="#map" className="font-semibold text-pine underline-offset-4 hover:underline">
           六套怎么排
         </a>
         <a href="#plain" className="font-semibold text-clay underline-offset-4 hover:underline">
@@ -56,13 +56,15 @@ export function OverviewView() {
                 className="grid gap-1 border border-line bg-paper px-4 py-4 transition-colors hover:border-pine sm:grid-cols-[7rem_1fr_auto] sm:items-center"
               >
                 <span className="font-serif text-xl text-pine">
-                  <span className="mr-2 text-clay">{index + 1}</span>
+                  <span className="mr-2 font-num text-clay">{index + 1}</span>
                   {section.name}
                 </span>
                 <span className="text-sm leading-relaxed text-muted">
-                  第 {section.range} 计 · {section.blurb}
+                  第 <span className="font-num">{section.range}</span> 计 · {section.blurb}
                 </span>
-                <span className="text-sm font-semibold text-teal">从第 {section.from} 计读起</span>
+                <span className="text-sm font-semibold text-pine">
+                  从第 <span className="font-num">{section.from}</span> 计读起
+                </span>
               </Link>
             </li>
           ))}
@@ -74,7 +76,7 @@ export function OverviewView() {
         intro="上面是题解，也是六套的地图。下面按同一个意思走五步。"
       />
 
-      <p className="mt-10 border-l-2 border-gold pl-4 font-serif text-xl leading-relaxed text-ink">
+      <p className="mt-10 border-l-2 border-clay pl-4 font-serif text-xl leading-relaxed text-ink">
         {overviewPlain.core}
       </p>
 
