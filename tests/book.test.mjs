@@ -132,12 +132,24 @@ test("主题状态只使用三十六计自己的键和事件", async () => {
   assert.ok(!THEME_BOOTSTRAP_SCRIPT.includes("principles:theme"));
 });
 
-function runBootstrap(script, { search = "", stored = null, storageThrows = false } = {}) {
+function runBootstrap(
+  script,
+  {
+    search = "",
+    stored = null,
+    storageThrows = false,
+    initialTheme = null,
+  } = {},
+) {
   const writes = [];
+  const removals = [];
   const root = {
-    dataset: {},
+    dataset: initialTheme ? { theme: initialTheme } : {},
     removeAttribute(name) {
-      if (name === "data-theme") delete this.dataset.theme;
+      if (name === "data-theme") {
+        removals.push(name);
+        delete this.dataset.theme;
+      }
     },
     setAttribute(name, value) {
       if (name === "data-theme") this.dataset.theme = value;
@@ -161,7 +173,7 @@ function runBootstrap(script, { search = "", stored = null, storageThrows = fals
     location: { search },
   });
 
-  return { theme: root.dataset.theme ?? "paper", writes };
+  return { theme: root.dataset.theme ?? "paper", writes, removals };
 }
 
 test("首屏脚本实际应用主题，并只把合法 URL 主题写回本站存储", async () => {
@@ -173,6 +185,7 @@ test("首屏脚本实际应用主题，并只把合法 URL 主题写回本站存
   }), {
     theme: "night",
     writes: [["36:theme", "night"]],
+    removals: [],
   });
   assert.deepEqual(runBootstrap(THEME_BOOTSTRAP_SCRIPT, {
     search: "?theme=invalid",
@@ -180,6 +193,7 @@ test("首屏脚本实际应用主题，并只把合法 URL 主题写回本站存
   }), {
     theme: "celadon",
     writes: [],
+    removals: [],
   });
   assert.deepEqual(runBootstrap(THEME_BOOTSTRAP_SCRIPT, {
     search: "?theme=paper",
@@ -187,6 +201,7 @@ test("首屏脚本实际应用主题，并只把合法 URL 主题写回本站存
   }), {
     theme: "paper",
     writes: [["36:theme", "paper"]],
+    removals: ["data-theme"],
   });
   assert.deepEqual(runBootstrap(THEME_BOOTSTRAP_SCRIPT, {
     search: "?theme=night",
@@ -194,6 +209,14 @@ test("首屏脚本实际应用主题，并只把合法 URL 主题写回本站存
   }), {
     theme: "night",
     writes: [],
+    removals: [],
+  });
+  assert.deepEqual(runBootstrap(THEME_BOOTSTRAP_SCRIPT, {
+    initialTheme: "night",
+  }), {
+    theme: "paper",
+    writes: [],
+    removals: ["data-theme"],
   });
 });
 
@@ -292,6 +315,26 @@ test("阅读站加载四种字体角色并在侧栏提供主题切换器", () =>
   assert.match(css, /\.font-kai/);
   assert.match(css, /\.font-num/);
   assert.match(shell, /ThemeSwitcher/);
+});
+
+test("侧栏的移动端当前序号、搜索计数和章节范围使用数字字体", () => {
+  const shell = readFileSync(
+    new URL("../src/components/reading-shell.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(
+    shell,
+    /<summary[^>]*>[\s\S]*?<span className="font-num">\{currentEntry\.n\}<\/span>/,
+  );
+  assert.match(
+    shell,
+    /找到\s*<span className="font-num">\{hits\.length\}<\/span>\s*计/,
+  );
+  assert.match(
+    shell,
+    /<span className="ml-2 font-num font-normal">\{group\.range\}<\/span>/,
+  );
 });
 
 test("主题切换器运行时渲染恰好三个可识别 radio", async () => {

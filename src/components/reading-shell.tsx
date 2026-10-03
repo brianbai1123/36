@@ -15,7 +15,6 @@ export function ReadingShell({
   children: ReactNode;
 }) {
   const currentEntry = current === "start" ? undefined : catalog.find((entry) => entry.n === current);
-  const label = currentEntry ? `${currentEntry.n} ${currentEntry.title}` : "开篇";
 
   return (
     <div className="min-h-full lg:grid lg:grid-cols-[18.5rem_minmax(0,1fr)]">
@@ -36,7 +35,16 @@ export function ReadingShell({
           <ThemeSwitcher />
         </div>
         <details className="border-t border-line px-5 py-3 lg:hidden">
-          <summary className="cursor-pointer text-sm font-semibold">目录 · {label}</summary>
+          <summary className="cursor-pointer text-sm font-semibold">
+            目录 ·{" "}
+            {currentEntry ? (
+              <>
+                <span className="font-num">{currentEntry.n}</span> {currentEntry.title}
+              </>
+            ) : (
+              "开篇"
+            )}
+          </summary>
           <ChapterIndex current={current} />
         </details>
         <div className="hidden px-3 pb-10 lg:block">
@@ -80,8 +88,14 @@ function ChapterIndex({ current }: { current: number | "start" }) {
       {keyword ? (
         <div className="px-2">
           <p className="text-xs font-semibold text-muted">
-            {hits.length > 0 ? `找到 ${hits.length} 计` : "没有这一计"}
-                      </p>
+            {hits.length > 0 ? (
+              <>
+                找到 <span className="font-num">{hits.length}</span> 计
+              </>
+            ) : (
+              "没有这一计"
+            )}
+          </p>
           <ol className="mt-1">
             {hits.map((entry) => (
               <IndexLink key={entry.n} n={entry.n} title={entry.title} active={entry.n === current} />
@@ -110,7 +124,7 @@ function ChapterIndex({ current }: { current: number | "start" }) {
               <details key={group.name} open={open} className="mb-3">
                 <summary className="cursor-pointer px-2 text-xs font-semibold tracking-wide text-muted">
                   {group.name}
-                  <span className="ml-2 font-normal">{group.range}</span>
+                  <span className="ml-2 font-num font-normal">{group.range}</span>
                 </summary>
                 <ol className="mt-1">
                   {group.entries.map((entry) => (

@@ -47,3 +47,14 @@ npm test && npm run lint && npx next typegen && npx tsc --noEmit && npm run buil
   `next/og ImageResponse` RCE（GHSA-vcvr-r3jv-pc5j）；修复版本为 16.3.8，
   超出本任务范围，未混入主题提交。
 - 按任务要求未 push / PR。
+
+## Important 审查修复
+
+- RED：先补充默认 `paper` 的 VM 执行场景，以及侧栏三个遗漏数字位置的契约；
+  运行 `npm test` 得到 14 项中 13 项通过、1 项按预期失败。默认 `paper`
+  场景已通过，失败项准确指出移动端当前序号、搜索结果计数、章节范围缺少
+  `font-num`。
+- 默认场景从预置的 `data-theme="night"` 开始，无 query、无 stored，实际执行
+  `THEME_BOOTSTRAP_SCRIPT` 后断言主题回到 `paper`、没有 storage 写入，并记录到
+  `removeAttribute("data-theme")` 调用；不是源码正则。
+- GREEN：为上述三个数字位置应用 `font-num` 后再次运行 `npm test`，14/14 通过。
